@@ -17,7 +17,7 @@ export const MonitoredPages = () => {
           template: "supabase",
         });
         const supabase = await supabaseClient(supabaseAccessToken);
-        const { data: pages } = await supabase.from("page").select("*");
+        const { data: pages } = await supabase.from("Page").select("*");
         setPages(pages);
       } catch (e) {
         alert(e);
@@ -39,7 +39,9 @@ export const MonitoredPages = () => {
         <div className={styles.monitoredPages}>
           <ol>
             {pages.map((page) => (
-              <li key={page.id}>{page.pageUrl}</li>
+              <li key={page.pageId}>
+                <a href={`/changes/${page.pageId}`}>{page.pageUrl}</a>
+              </li>
             ))}
           </ol>
         </div>
