@@ -27,7 +27,7 @@ export const MonitoredPages = () => {
     };
 
     loadPages();
-  }, []);
+  }, [session]);
 
   if (loading) {
     return <div className={styles.container}>Loading...</div>;
@@ -47,7 +47,7 @@ export const MonitoredPages = () => {
         </div>
       ) : (
         <div className={styles.label}>
-          You haven't started monitoring any pages!
+          You haven&apos;t started monitoring any pages!
         </div>
       )}
     </>
