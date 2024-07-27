@@ -1,16 +1,17 @@
 import { useRouter } from "next/router";
 import { useSession } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { Header } from "@/components/Header";
-import { supabaseClient } from "@/utils";
+import { Header } from "@/src/components/Header";
+import { supabaseClient } from "@/src/utils";
 import Image from "next/image";
+import { Tables } from "@/database.types";
 
 export default function Change() {
   const { session, isLoaded } = useSession();
   const router = useRouter();
   const { slug } = router.query;
   const [loading, setLoading] = useState(true);
-  const [changes, setChanges] = useState([]);
+  const [changes, setChanges] = useState<Tables<"Change">[]>([]);
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -18,16 +19,15 @@ export default function Change() {
     const loadChanges = async () => {
       try {
         setLoading(true);
-        const supabaseAccessToken = await session.getToken({
+        const supabaseAccessToken = await session?.getToken({
           template: "supabase",
         });
-        const supabase = await supabaseClient(supabaseAccessToken);
+        const supabase = await supabaseClient(supabaseAccessToken ?? "");
         const { data: changes } = await supabase
           .from("Change")
           .select("*")
-          .eq("pageId", slug);
-        console.log("TESTING", changes);
-        setChanges(changes);
+          .eq("pageId", slug ?? "");
+        setChanges(changes ?? []);
       } catch (e) {
         alert(e);
       } finally {
@@ -37,8 +37,6 @@ export default function Change() {
 
     loadChanges();
   }, [isLoaded, session, slug]);
-
-  console.log("CHANGES", changes);
 
   return (
     <>
