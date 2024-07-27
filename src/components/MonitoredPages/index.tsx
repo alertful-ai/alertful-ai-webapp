@@ -1,24 +1,34 @@
-import styles from "./MonitoredPages.module.css";
+"use client";
 
 import { useState, useEffect } from "react";
 import { useSession } from "@clerk/nextjs";
-import { supabaseClient } from "@/utils";
+import { supabaseClient } from "@/src/utils";
+
+import { Tables } from "@/database.types";
+
+interface PageType {
+  pageId: string;
+  pageUrl: string;
+}
 
 export const MonitoredPages = () => {
   const { session } = useSession();
   const [loading, setLoading] = useState(true);
-  const [pages, setPages] = useState(null);
+  const [pages, setPages] = useState<Tables<"Page">[]>([]);
 
   useEffect(() => {
     const loadPages = async () => {
       try {
         setLoading(true);
-        const supabaseAccessToken = await session.getToken({
+        const supabaseAccessToken = await session?.getToken({
           template: "supabase",
         });
-        const supabase = await supabaseClient(supabaseAccessToken);
-        const { data: pages } = await supabase.from("Page").select("*");
-        setPages(pages);
+        const supabase = await supabaseClient(supabaseAccessToken ?? "");
+        const { data } = await supabase
+          .from("Page")
+          .select("*")
+          .returns<Tables<"Page">[]>();
+        setPages(data ?? []);
       } catch (e) {
         alert(e);
       } finally {
@@ -30,13 +40,13 @@ export const MonitoredPages = () => {
   }, [session]);
 
   if (loading) {
-    return <div className={styles.container}>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <>
       {pages?.length > 0 ? (
-        <div className={styles.monitoredPages}>
+        <div>
           <ol>
             {pages.map((page) => (
               <li key={page.pageId}>
@@ -46,9 +56,7 @@ export const MonitoredPages = () => {
           </ol>
         </div>
       ) : (
-        <div className={styles.label}>
-          You haven&apos;t started monitoring any pages!
-        </div>
+        <div>You haven&apos;t started monitoring any pages!</div>
       )}
     </>
   );

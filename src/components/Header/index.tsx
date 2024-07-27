@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+"use client";
 
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 
@@ -6,7 +6,7 @@ export const Header = () => {
   const { isSignedIn } = useUser();
 
   return (
-    <header className={styles.header}>
+    <header>
       {isSignedIn ? (
         <UserButton />
       ) : (

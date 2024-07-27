@@ -1,18 +1,18 @@
 import styles from "./Home.module.css";
 
 import { useUser } from "@clerk/nextjs";
-import { Header } from "@/components/Header";
+import { Header } from "@/src/components/Header";
 
-import { MonitoredPages } from "@/components/MonitoredPages";
-import { AddNewPage } from "@/components/AddNewPage";
+import { MonitoredPages } from "@/src/components/MonitoredPages";
+import { AddNewPage } from "@/src/components/AddNewPage";
 
 export default function Home() {
-  const { isSignedIn, isLoading, user } = useUser();
+  const { isSignedIn, isLoaded, user } = useUser();
 
   return (
     <>
       <Header />
-      {isLoading ? (
+      {!isLoaded ? (
         <></>
       ) : (
         <main className={styles.main}>

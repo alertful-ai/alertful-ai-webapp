@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 
@@ -6,7 +8,7 @@ export const AddNewPage = () => {
   const [newPageUrl, setNewPageUrl] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (newPageUrl === "") {
       return;
