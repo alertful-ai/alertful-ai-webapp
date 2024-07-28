@@ -5,13 +5,13 @@ import { Header } from "@/src/components/Header";
 
 import { MonitoredPages } from "@/src/components/MonitoredPages";
 import { AddNewPage } from "@/src/components/AddNewPage";
+import Home from "@/src/pages/Home";
 
-export default function Home() {
+export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
 
   return (
-    <>
-      <Header />
+    <Home>
       {!isLoaded ? (
         <></>
       ) : (
@@ -33,6 +33,6 @@ export default function Home() {
           </div>
         </main>
       )}
-    </>
+    </Home>
   );
 }

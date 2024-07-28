@@ -9,6 +9,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.2.4",
     "@headlessui/react": "^2.1.2",
+    "@heroicons/react": "^2.1.5",
     "@supabase/supabase-js": "^2.44.4",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
