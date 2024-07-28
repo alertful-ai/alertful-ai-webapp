@@ -16,10 +16,8 @@ import {
 } from "@heroicons/react/20/solid";
 
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
-import { Heading } from "../../components/Tailwind/heading";
-import { Button } from "@headlessui/react";
 
-export default function Home({ children }: { children?: any }): any {
+export default function Layout({ children }: { children?: any }): any {
   const { isSignedIn, user } = useUser();
 
   return (

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useSession } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { Header } from "@/src/components/Header";
 import { supabaseClient } from "@/src/utils";
 import Image from "next/image";
 import { Tables } from "@/database.types";
@@ -40,8 +39,6 @@ export default function Change() {
 
   return (
     <>
-      <Header />
-
       <p>{slug}</p>
 
       {loading ? <p>Loading...</p> : null}

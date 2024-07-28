@@ -2,9 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "@clerk/nextjs";
-import { supabaseClient } from "@/src/utils";
+import { supabaseClient, formatTimestamp } from "@/src/utils";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/src/components/Tailwind/table";
 
 import { Tables } from "@/database.types";
+import { Button } from "@/src/components/Tailwind/button";
+import { Subheading } from "../Tailwind/heading";
 
 interface PageType {
   pageId: string;
@@ -44,20 +55,33 @@ export const MonitoredPages = () => {
   }
 
   return (
-    <>
+    <div className="mt-12">
+      <div className="flex flex-end w-full justify-between items-center">
+        <Subheading>Monitored URLs</Subheading>
+        <Button>Add New URL</Button>
+      </div>
       {pages?.length > 0 ? (
-        <div>
-          <ol>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader>URL</TableHeader>
+              <TableHeader>Last Update</TableHeader>
+              <TableHeader>Created At</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {pages.map((page) => (
-              <li key={page.pageId}>
-                <a href={`/changes/${page.pageId}`}>{page.pageUrl}</a>
-              </li>
+              <TableRow key={page.pageId} href={`/changes/${page.pageId}`}>
+                <TableCell>{page.pageUrl}</TableCell>
+                <TableCell>{formatTimestamp(page.updated_at)}</TableCell>
+                <TableCell>{formatTimestamp(page.created_at)}</TableCell>
+              </TableRow>
             ))}
-          </ol>
-        </div>
+          </TableBody>
+        </Table>
       ) : (
         <div>You haven&apos;t started monitoring any pages!</div>
       )}
-    </>
+    </div>
   );
 };
