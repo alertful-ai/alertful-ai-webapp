@@ -1,11 +1,9 @@
-import styles from "./Home.module.css";
-
 import { useUser } from "@clerk/nextjs";
-import { Header } from "@/src/components/Header";
 
 import { MonitoredPages } from "@/src/components/MonitoredPages";
 import { AddNewPage } from "@/src/components/AddNewPage";
 import Home from "@/src/pages/Home";
+import { Heading } from "../components/Tailwind/heading";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -15,17 +13,20 @@ export default function App() {
       {!isLoaded ? (
         <></>
       ) : (
-        <main className={styles.main}>
-          <div className={styles.container}>
+        <main>
+          <div className="flex w-full flex-wrap items-end justify-between gap-4 border-b border-zinc-950/10 pb-6 dark:border-white/10">
+            <Heading>Home</Heading>
+          </div>
+          <div>
             {isSignedIn ? (
               <>
-                <div className={styles.label}>Welcome {user.firstName}!</div>
+                <div>Welcome {user.firstName}!</div>
 
                 <MonitoredPages />
                 <AddNewPage />
               </>
             ) : (
-              <div className={styles.label}>
+              <div>
                 Sign in to start monitoring and get automated alerts on your
                 competitors!
               </div>

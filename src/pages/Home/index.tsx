@@ -16,6 +16,8 @@ import {
 } from "@heroicons/react/20/solid";
 
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Heading } from "../../components/Tailwind/heading";
+import { Button } from "@headlessui/react";
 
 export default function Home({ children }: { children?: any }): any {
   const { isSignedIn, user } = useUser();
@@ -51,7 +53,13 @@ export default function Home({ children }: { children?: any }): any {
           </SidebarBody>
           <SidebarFooter>
             {isSignedIn ? (
-              <UserButton />
+              <div className="flex flex-row">
+                <UserButton></UserButton>
+                <div className="flex flex-col mx-4">
+                  <p>{user.fullName}</p>
+                  <p>{user.primaryEmailAddress?.toString() ?? ""}</p>
+                </div>
+              </div>
             ) : (
               <>
                 <SidebarSection>
