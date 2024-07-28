@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/nextjs";
 
-import { MonitoredPages } from "@/src/components/MonitoredPages";
-import { Heading } from "../components/Tailwind/heading";
+import { MonitoredPages } from "@/src/components/monitoredPages";
+import { Heading } from "../components/tailwind/heading";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();

@@ -1,6 +1,6 @@
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Layout from "@/src/components/Layout";
+import Layout from "@/src/components/layout";
 
 export default function App({
   Component,

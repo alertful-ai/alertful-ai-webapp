@@ -11,11 +11,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/src/components/Tailwind/table";
+} from "@/src/components/tailwind/table";
 
 import { Tables } from "@/database.types";
-import { Button } from "@/src/components/Tailwind/button";
-import { Subheading } from "../Tailwind/heading";
+import { Button } from "@/src/components/tailwind/button";
+import { Subheading } from "../tailwind/heading";
 
 interface PageType {
   pageId: string;
