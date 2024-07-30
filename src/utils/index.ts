@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
-export const supabaseClient = async (supabaseAccessToken) => {
+export const supabaseClient = async (supabaseAccessToken: string) => {
   const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_KEY,
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "",
     {
       global: { headers: { Authorization: `Bearer ${supabaseAccessToken}` } },
     }
@@ -12,7 +12,7 @@ export const supabaseClient = async (supabaseAccessToken) => {
   return supabase;
 };
 
-export function formatTimestamp(timestamp) {
+export function formatTimestamp(timestamp: string) {
   const date = new Date(timestamp);
 
   // Array of month names

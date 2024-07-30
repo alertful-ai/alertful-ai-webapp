@@ -161,8 +161,12 @@ export const MonitoredPages = () => {
               {pages.map((page) => (
                 <TableRow key={page.pageId} href={`/changes/${page.pageId}`}>
                   <TableCell>{page.pageUrl}</TableCell>
-                  <TableCell>{formatTimestamp(page.updated_at)}</TableCell>
-                  <TableCell>{formatTimestamp(page.created_at)}</TableCell>
+                  <TableCell>
+                    {formatTimestamp(page.updated_at ?? "")}
+                  </TableCell>
+                  <TableCell>
+                    {formatTimestamp(page.created_at ?? "")}
+                  </TableCell>
                 </TableRow>
               ))}
             </>
