@@ -31,7 +31,7 @@ export default function Layout({ children }: { children?: any }): any {
           <SidebarHeader>
             <SidebarSection>
               <SidebarItem>
-                <Heading>Alertable AI</Heading>
+                <Heading>Alertful AI</Heading>
               </SidebarItem>
             </SidebarSection>
           </SidebarHeader>
