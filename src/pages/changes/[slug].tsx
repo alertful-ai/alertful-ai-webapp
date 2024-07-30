@@ -12,7 +12,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/table";
-import Breadcrumbs from "@/src/components/breadcrumbs";
+import Breadcrumbs from "@/components/breadcrumbs";
 
 export default function Change() {
   const { session, isLoaded } = useSession();

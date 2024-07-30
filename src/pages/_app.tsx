@@ -1,6 +1,6 @@
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Layout from "@/src/components/layout";
+import Layout from "@/components/layout";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function App({

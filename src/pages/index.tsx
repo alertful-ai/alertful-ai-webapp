@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 
-import { MonitoredPages } from "@/src/components/monitoredPages";
+import { MonitoredPages } from "@/components/monitoredPages";
 import { Heading } from "@/components/heading";
 
 export default function App() {
