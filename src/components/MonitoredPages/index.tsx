@@ -12,20 +12,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/src/components/tailwind/table";
+} from "@/components/table";
 
 import { Tables } from "@/database.types";
-import { Button } from "@/src/components/tailwind/button";
-import { Subheading } from "@/src/components/tailwind/heading";
+import { Button } from "@/components/button";
+import { Subheading } from "@/components/heading";
 import {
   Dialog,
   DialogActions,
   DialogBody,
   DialogDescription,
   DialogTitle,
-} from "@/src/components/tailwind/dialog";
-import { Field, Label } from "@/src/components/tailwind/fieldset";
-import { Input } from "@/src/components/tailwind/input";
+} from "@/components/dialog";
+import { Field, Label } from "@/components/fieldset";
+import { Input } from "@/components/input";
 
 interface PageType {
   pageId: string;

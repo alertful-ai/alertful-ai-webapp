@@ -3,7 +3,7 @@ import { useSession } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import { formatTimestamp, supabaseClient } from "@/src/utils";
 import { Tables } from "@/database.types";
-import { Heading, Subheading } from "@/src/components/tailwind/heading";
+import { Heading, Subheading } from "@/components/heading";
 import {
   Table,
   TableHead,
@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-} from "@/src/components/tailwind/table";
+} from "@/components/table";
 import Breadcrumbs from "@/src/components/breadcrumbs";
 
 export default function Change() {

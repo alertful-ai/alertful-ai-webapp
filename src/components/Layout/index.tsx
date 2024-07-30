@@ -7,8 +7,8 @@ import {
   SidebarLabel,
   SidebarSection,
   SidebarSpacer,
-} from "@/src/components/tailwind/sidebar";
-import { SidebarLayout } from "@/src/components/tailwind/sidebar-layout";
+} from "@/components/sidebar";
+import { SidebarLayout } from "@/components/sidebar-layout";
 import {
   HomeIcon,
   QuestionMarkCircleIcon,
@@ -17,7 +17,7 @@ import {
 } from "@heroicons/react/20/solid";
 
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
-import { Heading } from "@/src/components/tailwind/heading";
+import { Heading } from "@/components/heading";
 
 export default function Layout({ children }: { children?: any }): any {
   const { isSignedIn, user } = useUser();
