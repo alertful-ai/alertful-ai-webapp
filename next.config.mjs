@@ -4,6 +4,9 @@ const nextConfig = {
   // output: "export",
 
   reactStrictMode: true,
+  images: {
+    domains: ["isqddcgzdgptlypyhuad.supabase.co"],
+  },
 };
 
 export default nextConfig;

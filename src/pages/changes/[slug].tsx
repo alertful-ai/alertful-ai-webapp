@@ -1,9 +1,18 @@
 import { useRouter } from "next/router";
 import { useSession } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { supabaseClient } from "@/src/utils";
-import Image from "next/image";
+import { formatTimestamp, supabaseClient } from "@/src/utils";
 import { Tables } from "@/database.types";
+import { Heading, Subheading } from "../../components/tailwind/heading";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
+} from "../../components/tailwind/table";
+import Breadcrumbs from "../../components/breadcrumbs";
 
 export default function Change() {
   const { session, isLoaded } = useSession();
@@ -25,7 +34,9 @@ export default function Change() {
         const { data: changes } = await supabase
           .from("Change")
           .select("*")
-          .eq("pageId", slug ?? "");
+          .eq("pageId", slug ?? "")
+          .neq("summary", "")
+          .order("created_at", { ascending: false });
         setChanges(changes ?? []);
       } catch (e) {
         alert(e);
@@ -38,29 +49,58 @@ export default function Change() {
   }, [isLoaded, session, slug]);
 
   return (
-    <>
-      <p>{slug}</p>
+    <div>
+      <Breadcrumbs />
 
-      {loading ? <p>Loading...</p> : null}
+      <div className="mt-8">
+        <Heading>Changes</Heading>
+      </div>
 
-      {changes.length > 0
-        ? changes.map((change) => {
-            return (
-              <div
-                key={change.changeId}
-                style={{ display: "flex", marginBottom: 20 }}
-              >
-                <Image
-                  src={change.imageUrl}
-                  alt="image"
-                  width={600}
-                  height={600}
-                />
-                <p>{change.summary}</p>
-              </div>
-            );
-          })
-        : null}
-    </>
+      <div className="mt-12">
+        <div className="flex flex-end w-full items-center">
+          <Subheading>Change History</Subheading>
+        </div>
+
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader>URL</TableHeader>
+              <TableHeader>Summary</TableHeader>
+              <TableHeader>Updated at</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {changes.length > 0 ? (
+              <>
+                {changes.map((change) => {
+                  return (
+                    <TableRow key={change.changeId}>
+                      <TableCell>
+                        <a
+                          href={change.imageUrl}
+                          className="text-blue-600/100 hover:text-blue-300"
+                        >
+                          View Image
+                        </a>
+                      </TableCell>
+                      <TableCell className="text-pretty">
+                        <p>{change.summary}</p>
+                      </TableCell>
+                      <TableCell>
+                        {formatTimestamp(change.created_at)}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </>
+            ) : (
+              <></>
+            )}
+          </TableBody>
+        </Table>
+
+        {loading ? <p>Loading...</p> : <></>}
+      </div>
+    </div>
   );
 }

@@ -18,7 +18,7 @@ import {
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default function Layout({ children }: { children?: any }): any {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn, isLoaded, user } = useUser();
 
   return (
     <SidebarLayout
