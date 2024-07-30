@@ -2,6 +2,7 @@ import {
   Sidebar,
   SidebarBody,
   SidebarFooter,
+  SidebarHeader,
   SidebarItem,
   SidebarLabel,
   SidebarSection,
@@ -16,9 +17,10 @@ import {
 } from "@heroicons/react/20/solid";
 
 import { useUser, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Heading } from "@/src/components/tailwind/heading";
 
 export default function Layout({ children }: { children?: any }): any {
-  const { isSignedIn, isLoaded, user } = useUser();
+  const { isSignedIn, user } = useUser();
 
   return (
     <SidebarLayout
@@ -26,6 +28,13 @@ export default function Layout({ children }: { children?: any }): any {
         <Sidebar>
           {/* TODO: Add Alertable AI title here */}
           {/* <SidebarHeader></SidebarHeader> */}
+          <SidebarHeader>
+            <SidebarSection>
+              <SidebarItem>
+                <Heading>Alertable AI</Heading>
+              </SidebarItem>
+            </SidebarSection>
+          </SidebarHeader>
           <SidebarBody>
             <SidebarSection>
               <SidebarItem href="/">
