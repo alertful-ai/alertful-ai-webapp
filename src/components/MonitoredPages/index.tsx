@@ -15,7 +15,7 @@ import {
 
 import { Tables } from "@/database.types";
 import { Button } from "@/src/components/tailwind/button";
-import { Subheading } from "../tailwind/heading";
+import { Subheading } from "@/src/components/tailwind/heading";
 import {
   Dialog,
   DialogActions,
@@ -25,9 +25,6 @@ import {
 } from "@/src/components/tailwind/dialog";
 import { Field, Label } from "@/src/components/tailwind/fieldset";
 import { Input } from "@/src/components/tailwind/input";
-import { Dropdown, DropdownButton } from "../tailwind/dropdown";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Select } from "../tailwind/select";
 
 interface PageType {
   pageId: string;

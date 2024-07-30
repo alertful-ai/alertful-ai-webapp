@@ -6,8 +6,8 @@ import {
   SidebarLabel,
   SidebarSection,
   SidebarSpacer,
-} from "../tailwind/sidebar";
-import { SidebarLayout } from "../tailwind/sidebar-layout";
+} from "@/src/components/tailwind/sidebar";
+import { SidebarLayout } from "@/src/components/tailwind/sidebar-layout";
 import {
   HomeIcon,
   QuestionMarkCircleIcon,
