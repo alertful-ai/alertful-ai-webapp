@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth, useSession } from "@clerk/nextjs";
 import { supabaseClient, formatTimestamp } from "@/src/utils";
+import { useToast } from "@/components/ui/use-toast";
 
 import {
   Table,
@@ -38,6 +39,7 @@ export const MonitoredPages = () => {
   const [pages, setPages] = useState<Tables<"Page">[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [newURL, setNewURL] = useState<string>("");
+  const { toast } = useToast();
 
   useEffect(() => {
     const loadPages = async () => {
@@ -94,13 +96,22 @@ export const MonitoredPages = () => {
       );
 
       await response.json();
+      setIsOpen(false);
+
+      toast({
+        title: "Added URL!",
+        description: `Successfully added the URL ${newURL} to be monitored.`,
+      });
 
       setNewURL("");
-      setIsOpen(false);
       // TODO: Add Toast Success
     } catch (error) {
       // TODO: Add Toast Failure
-      console.error("Error adding page:", error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request. Please try again.",
+      });
       setNewURL("");
       setIsOpen(false);
     }
