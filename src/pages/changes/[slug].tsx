@@ -20,6 +20,7 @@ export default function Change() {
   const { slug } = router.query;
   const [loading, setLoading] = useState(true);
   const [changes, setChanges] = useState<Tables<"Change">[]>([]);
+  const [pageData, setPageData] = useState<string>();
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -31,6 +32,13 @@ export default function Change() {
           template: "supabase",
         });
         const supabase = await supabaseClient(supabaseAccessToken ?? "");
+        const { data: page } = await supabase
+          .from("Page")
+          .select("pageUrl")
+          .eq("pageId", slug ?? "")
+          .limit(1)
+          .single();
+
         const { data: changes } = await supabase
           .from("Change")
           .select("*")
@@ -38,6 +46,7 @@ export default function Change() {
           .neq("summary", "")
           .order("created_at", { ascending: false });
         setChanges(changes ?? []);
+        setPageData(page?.pageUrl ?? "");
       } catch (e) {
         alert(e);
       } finally {
@@ -53,7 +62,7 @@ export default function Change() {
       <Breadcrumbs />
 
       <div className="mt-8">
-        <Heading>Changes</Heading>
+        <Heading>Changes for {pageData}</Heading>
       </div>
 
       <div className="mt-12">
